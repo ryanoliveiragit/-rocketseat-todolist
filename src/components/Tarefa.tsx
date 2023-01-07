@@ -1,35 +1,47 @@
-import React, { ChangeEvent, FormEvent, InvalidEvent, useState } from "react"
+import React, { FormEvent, useState } from "react"
 import styles from './Tarefa.module.css'
 
 
 export default function Tarefa(){
-    const [task, setTask] = useState('');
-    const [todoList, setTodoList] = useState<string[]>([]);
 
-    console.log(todoList)
+    const [task, setTask] = useState('');
+    //task = valor inicial do input
+    //setTask = para controlar esse valor inicial
+
+    const [todoList, setTodoList] = useState<string[]>([]);
+    //aqui vamos definir que o todoList é um array de strings
+    //setTodoList é para controlar esse array
 
     function handleAddTodoList(event: FormEvent) {
+    //quando o formulario for enviador (onsubmit do form)
         event.preventDefault();
+    //não vamos recarregar a pagina, vamos manter ela sem refresh
         setTodoList((oldTodoList) => [...oldTodoList, task]);
+    //vamos setar dentro do nosso todolist (usamos o set pra contrar o estado)
+    //vamos pegar todos valores anterior do todolist e vamos adicionar mais uma task dentro do nosso array(todoList)
         setTask('')
-
     }
 
-    return(
+    return (
         <div className={styles.container}>
-            <form onSubmit={handleAddTodoList}>
+
+            <form onSubmit={handleAddTodoList}> {/* onsubmit = quando o formulario for enviador */}
+
                 <input
                     type="text" 
-                    value={task}
-                    onChange={(event) => setTask(event.target.value)}
+                    value={task}  //aqui vamos pegar o valor do input
+                    onChange={(event) => setTask(event.target.value)} // utilizado para que seja realizada determinada ação após alguma mudança.
                 />
-                <button type="submit">Adicionar</button>
+
+                <button type="submit">Adicionar</button> {/* aqui vamos usar o submit */}
+            
             </form>
 
             <ul>
-                {todoList.map((todo) => 
-                    <li>{todo}</li>
-                )}
+                {todoList.map((todo) => //vamos pegar o todoList que adicionamos as taks dentro
+                    <li>{todo}</li> //vamos passar um map pra dentro dele e mostrar na tela todos
+                //os items que estão dentro do todolist.
+                )}             
             </ul>
         </div>
     )
