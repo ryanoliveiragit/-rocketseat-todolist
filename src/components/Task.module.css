@@ -1,4 +1,7 @@
+.container {
+    margin-top: 1.5rem;
+}
 .task {
-    background-color: red;
     color: aqua;
+    background-color: rebeccapurple;
 }

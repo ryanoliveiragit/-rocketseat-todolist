@@ -1,11 +1,17 @@
-import style from './Task.module.css'
+import style from "./Task.module.css";
 
 interface TaskProps {
-    children: string;
+  children: string;
 }
 
-export default function Task({children}:TaskProps) {
-    return(
-        <div className={style.task}>{children}</div>
-    )
+export default function Task({ children }: TaskProps) {
+  return (
+    <div className={style.container}>
+      <div 
+        className={style.task}
+    >
+        {children}
+    </div>
+    </div>
+  );
 }

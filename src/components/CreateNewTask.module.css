@@ -62,3 +62,34 @@ form {
     width: 1rem;
     margin: 0;
 }
+
+.containerList {
+    margin-top: 4rem;
+}
+.containerTaskCounts {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px;
+}
+.containerTaskCounts > div{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+}
+p {
+    font-size: .87rem;
+    font-weight: 700;
+    color: var(--blue);
+}
+.countTask {
+    color: var(--white);
+    background-color: var(--gray-400);
+    border-radius: 999px;
+    gap: 10px;
+    padding: 2px 8px 2px 8px;
+}
+
+

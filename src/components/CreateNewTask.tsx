@@ -41,12 +41,24 @@ export default function CreateNewTask(){
             
             </form>
 
+            <section className={styles.containerList}>
+                <div className={styles.containerTaskCounts}>
+                    <div>
+                        <p>Tarefas criadas </p>
+                        <p className={styles.countTask}>0</p>
+                    </div>
+                    <div>
+                        <p>Concluídas </p>
+                        <p className={styles.countTask}>0</p>
+                    </div>
+                </div>
             <ul>
                 {todoList.map((todo) => //vamos pegar o todoList que adicionamos as taks dentro
-                    <Task>{todo}</Task> //vamos passar um map pra dentro dele e mostrar na tela todos
+                    <Task key={todo}>{todo}</Task> //vamos passar um map pra dentro dele e mostrar na tela todos
                 //os items que estão dentro do todolist.
                 )}             
             </ul>
+            </section>
         </div>
     )
 }
