@@ -1,0 +1,27 @@
+.header {
+    background: var(--gray-700);
+    display: flex;
+    padding: 6.2rem 0;
+    justify-content: center;
+}
+header div {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+}
+img {
+    width: 1.3rem;
+    margin-right: .75rem;
+}
+.to {
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 48.41px;
+    color: var(--blue);
+}
+.do {
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 48.41px;
+    color: var(--purple);
+}
