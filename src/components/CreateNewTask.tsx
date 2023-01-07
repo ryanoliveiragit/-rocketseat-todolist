@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react"
+import React, { FormEvent, InvalidEvent, useState } from "react"
 import styles from './CreateNewTask.module.css'
 import Task from "./Task";
 
@@ -23,6 +23,8 @@ export default function CreateNewTask(){
         setTask('')
     }
 
+    const handleNewTaskEmpty = task.length === 0
+
     return (
         <div className={styles.container}>
 
@@ -30,12 +32,12 @@ export default function CreateNewTask(){
 
                 <input
                     placeholder="Adicione uma tarefa"
-                    type="text" 
+                    type="text"
                     value={task}  //aqui vamos pegar o valor do input
                     onChange={(event) => setTask(event.target.value)} // utilizado para que seja realizada determinada ação após alguma mudança.
                 />
 
-                <button type="submit">Adicionar</button> {/* aqui vamos usar o submit */}
+                <button type="submit" disabled={handleNewTaskEmpty}>Adicionar</button> {/* aqui vamos usar o submit */}
             
             </form>
 
