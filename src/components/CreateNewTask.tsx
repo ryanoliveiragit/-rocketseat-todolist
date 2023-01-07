@@ -1,8 +1,9 @@
 import React, { FormEvent, useState } from "react"
-import styles from './Tarefa.module.css'
+import styles from './CreateNewTask.module.css'
+import Task from "./Task";
 
 
-export default function Tarefa(){
+export default function CreateNewTask(){
 
     const [task, setTask] = useState('');
     //task = valor inicial do input
@@ -28,6 +29,7 @@ export default function Tarefa(){
             <form onSubmit={handleAddTodoList}> {/* onsubmit = quando o formulario for enviador */}
 
                 <input
+                    placeholder="Adicione uma tarefa"
                     type="text" 
                     value={task}  //aqui vamos pegar o valor do input
                     onChange={(event) => setTask(event.target.value)} // utilizado para que seja realizada determinada ação após alguma mudança.
@@ -39,7 +41,7 @@ export default function Tarefa(){
 
             <ul>
                 {todoList.map((todo) => //vamos pegar o todoList que adicionamos as taks dentro
-                    <li>{todo}</li> //vamos passar um map pra dentro dele e mostrar na tela todos
+                    <Task>{todo}</Task> //vamos passar um map pra dentro dele e mostrar na tela todos
                 //os items que estão dentro do todolist.
                 )}             
             </ul>

@@ -1,12 +1,11 @@
-.container {
+form {
+    gap: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     
-    gap: 8px;
     margin-top: -2rem;
 }
-
 .container input {
     flex-grow: 1;
     border: none;

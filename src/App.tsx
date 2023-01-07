@@ -3,14 +3,14 @@ import styles from "./App.module.css";
 
 import Container from "./components/Container";
 import Header from "./components/Header";
-import Tarefa from "./components/Tarefa";
+import CreateNewTask from "./components/CreateNewTask";
 
 export default function App() {
   return (
     <div>
       <Header />
       <Container>
-        <Tarefa />
+        <CreateNewTask />
       </Container>
     </div>
   );
