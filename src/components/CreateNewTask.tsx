@@ -5,37 +5,58 @@ import Task from "./Task";
 
 export default function CreateNewTask(){
 
-    const [newTodoText, setnewTodoText] = useState('')
-    //task = valor inicial do input
-    //setTask = para controlar esse valor inicial
+    const [selectedCount, setSelectedCount] = useState(0);
 
+    const updateSelectedCount = (isChecked: boolean) => {
+        if (isChecked) {
+            setSelectedCount (selectedCount + 1);
+        } else {
+            setSelectedCount (selectedCount - 1 );
+        }
+    }
+
+
+    const [newTodoText, setnewTodoText] = useState('')
+    //newTodoText = valor inicial do input
+    //setnewTodoText = para controlar esse valor inicial
+
+    const deleteTask = ({taskToDelete, ischeched}:any) => {
+        const updatedTasks = [...task];
+
+        if(selectedCount > 0) {
+            setSelectedCount (selectedCount -1);
+        }
+
+        updatedTasks.splice(taskToDelete, 1)
+        setTask(updatedTasks )
+     }
+     
     const [task, setTask] = useState([
         {
             content: 'task',
             id: String(Math.floor(Math.random() * 1000)),
-            isComplete: false,
+            //isComplete: false,
         },
     ]);
-    //aqui vamos definir que o todoList é um array de strings
-    //setTodoList é para controlar esse array
+    //aqui vamos definir que o task é um array
+    //setTask é para controlar esse array
 
     function handleAddTodoList(event: FormEvent) {
     //quando o formulario for enviador (onsubmit do form)
         event.preventDefault();
-
+    
         const newTask = {
             id: String(Math.floor(Math.random() * 1000)),
             content: newTodoText,
             isComplete: false,
           };
-    //não vamos recarregar a pagina, vamos manter ela sem refresh
         setTask((oldTodoList) => [...oldTodoList, newTask]);
     //vamos setar dentro do nosso todolist (usamos o set pra contrar o estado)
     //vamos pegar todos valores anterior do todolist e vamos adicionar mais uma task dentro do nosso array(todoList)
     setnewTodoText('')
     }
 
-    const handleNewTaskEmpty = task.length === 0
+    const handleNewTaskEmpty = newTodoText.length === 0
 
     return (
         <div className={styles.container}>
@@ -70,16 +91,16 @@ export default function CreateNewTask(){
                     </div>
                     <div>
                         <p>Concluídas </p>
-                        <p className={styles.countTask}>0</p>
+                        <p className={styles.countTask}> {selectedCount} de {task.length}</p>
                     </div>
                 </div>
             <ul>
-                {task.map((todo) => //vamos pegar o todoList que adicionamos as taks dentro
+                {task.map((todo, taskToDelete) => //vamos pegar o todoList que adicionamos as taks dentro
                     <Task
-                    key={todo.id}
-                    isComplete={todo.isComplete}
-                    content={todo.content}
-                  />//vamos passar um map pra dentro dele e mostrar na tela todos
+                        key={todo.id}
+                        onDeleteTask={() => deleteTask(taskToDelete)}
+                        content={todo.content}
+                        updateSelectedCount={updateSelectedCount}                 />//vamos passar um map pra dentro dele e mostrar na tela todos
                 //os items que estão dentro do todolist.
                 )}             
             </ul>
