@@ -5,15 +5,13 @@ import { RadioButton, Check, Trash } from "phosphor-react";
 interface TaskProps {
   content: string;
   onDeleteTask: (content: string) => void;
-  updateSelectedCount: any;
 }
 
-export default function Task({ content, updateSelectedCount, onDeleteTask }: TaskProps) {
+export default function Task({ content, onDeleteTask }: TaskProps) {
   const [isChecked, setIsChecked] = useState(false)
 
   const handleOnChange = (e: { target: { checked: any; }; }) => {
     setIsChecked(!isChecked)
-    updateSelectedCount(e.target.checked)
   }
 
   function handleDeleteTaks(){
