@@ -4,12 +4,12 @@
     padding: 6.2rem 0;
     justify-content: center;
 }
-header div {
+.header > div {
     display: flex;
     align-items: center;
     margin-left: 12px;
 }
-img {
+.header > div > img {
     width: 1.3rem;
     margin-right: .75rem;
 }
