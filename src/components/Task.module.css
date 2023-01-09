@@ -1,0 +1,36 @@
+.container {
+    margin-top: 1.5rem;
+}
+.task {
+    border-radius: 8px;
+    border: 1px solid var(--gray-400);
+
+    padding: 1rem;
+    color: var(--white);
+    background-color: var(--gray-500);
+}
+label {
+    width: 2100px;
+}
+
+label > p {
+    color: var(--gray-100);
+    font-size: 0.87rem;
+    font-weight: 400;
+    line-height: 20px;
+
+    flex: 1;
+
+    word-wrap: break-word;
+    order: 1;
+    flex-grow: 1;
+}
+
+.task > div {
+    gap: 12px;
+    display: flex;
+}
+.checked{
+    text-decoration: line-through;
+    color: var(--gray-300);
+}
