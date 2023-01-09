@@ -37,11 +37,12 @@ export default function CreateNewTask() {
     setNewTask(event.target.value);
   }
 
-  function deleteTask(taskToDelete) {
-    const newWithoutDeleteOne = task.filter(taskContent => {
-        return taskContent != taskToDelete;
-    })
-    setTask(newWithoutDeleteOne);
+
+  function deleteTask(deletedTodo: string) {
+    const filterTodos = task.filter(
+        (todo) => todo.content !== deletedTodo)
+    ;
+    setTask(filterTodos)
   }
 
   const handleNewTaskEmpty = newTask.length === 0;
