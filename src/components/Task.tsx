@@ -6,22 +6,20 @@ interface TaskProps {
   content: string;
   isComplete: any;
   onDeleteTask: (content: string) => void;
+  handleUpdateTask: any
+  id: number;
 }
 
-export default function Task({ content, onDeleteTask, isCompleteCheckout }: TaskProps) {
+export default function Task({ content, onDeleteTask,  handleUpdateTask, id }: TaskProps) {
   const [isChecked, setIsChecked] = useState(false)
 
-  const handleOnChange = () => {
+  const handleOnChange = (e: any) => {
     setIsChecked(!isChecked)
+    handleUpdateTask(id, e.target.checked);
   }
 
   function handleDeleteTaks(){
     onDeleteTask(content)
-  }
-  
-  function chekedss (isCompleteCheckout){
-    isCompleteCheckout = isChecked
-    return isCompleteCheckout
   }
 
   return (
@@ -35,7 +33,6 @@ export default function Task({ content, onDeleteTask, isCompleteCheckout }: Task
             id="check1"
             className={style.checkbox}
             name="check"
-            value={chekedss}
           />
           <label>
             <p className={isChecked ? style.checked : ''}>{content}.</p>

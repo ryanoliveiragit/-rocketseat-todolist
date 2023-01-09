@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, InvalidEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, InvalidEvent, useEffect, useState } from "react";
 import styles from "./CreateNewTask.module.css";
 import Task from "./Task";
 
@@ -8,14 +8,23 @@ export default function CreateNewTask() {
     {
         id: 1,
         content: 'task',
-        isComplete: false
+        isComplete: false,
     }
   ]);
+
+  const [inputCheckedCount, setInputCheckedCount] = useState(0);
+
+  useEffect(() => {
+    function countInputChecked() {
+      const filterInputs = task.filter((input) => input.isComplete === true);
+      setInputCheckedCount(filterInputs.length);
+    }
+    countInputChecked();
+  }, [task]);
 
   const [newTask, setNewTask] = useState("");
 
   function handleAddTodoList(event: FormEvent) {
-
     const NewTaskContent: {
         id: number,
         content: string,
@@ -26,7 +35,6 @@ export default function CreateNewTask() {
         isComplete: false,
     }
     event.preventDefault();
-
     setTask((oldTodoList) => [...oldTodoList, NewTaskContent]);
     setNewTask("");
   }
@@ -37,6 +45,17 @@ export default function CreateNewTask() {
     setNewTask(event.target.value);
   }
 
+  function handleUpdateTask(id: number, isComplete: any) {
+    setTask(prevTask => prevTask.map(task => {
+      if (task.id === id) {
+        return {
+          ...task,
+          isComplete
+        };
+      }
+      return task;
+    }));
+  }
 
   function deleteTask(deletedTodo: string) {
     const filterTodos = task.filter(
@@ -82,7 +101,7 @@ export default function CreateNewTask() {
           </div>
           <div>
             <p>Concluídas </p>
-            <p className={styles.countTask}>0 de {task.length}</p>
+            <p className={styles.countTask}>{inputCheckedCount} de {task.length}</p>
           </div>
         </div>
         <ul>
@@ -91,7 +110,9 @@ export default function CreateNewTask() {
               key={todo.id}
               onDeleteTask={deleteTask}
               content={todo.content}
-              isCompleteCheckout={todo.isComplete}
+              isComplete={todo.isComplete}
+              handleUpdateTask={handleUpdateTask}
+              id={todo.id}
             />
           ))}
         </ul>
