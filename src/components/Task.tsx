@@ -4,13 +4,14 @@ import { RadioButton, Check, Trash } from "phosphor-react";
 
 interface TaskProps {
   content: string;
+  isComplete: any;
   onDeleteTask: (content: string) => void;
 }
 
-export default function Task({ content, onDeleteTask }: TaskProps) {
+export default function Task({ content, onDeleteTask, isCompleteCheckout }: TaskProps) {
   const [isChecked, setIsChecked] = useState(false)
 
-  const handleOnChange = (e: { target: { checked: any; }; }) => {
+  const handleOnChange = () => {
     setIsChecked(!isChecked)
   }
 
@@ -18,19 +19,23 @@ export default function Task({ content, onDeleteTask }: TaskProps) {
     onDeleteTask(content)
   }
   
+  function chekedss (isCompleteCheckout){
+    isCompleteCheckout = isChecked
+    return isCompleteCheckout
+  }
 
   return (
     <div className={style.container}>
       <div className={style.task}>
         <div className={style.checkbox}>
           <input
-            value="checkbox"
             checked={isChecked}
             onChange={handleOnChange}
             type="checkbox"
             id="check1"
             className={style.checkbox}
             name="check"
+            value={chekedss}
           />
           <label>
             <p className={isChecked ? style.checked : ''}>{content}.</p>

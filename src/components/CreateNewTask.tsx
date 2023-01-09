@@ -91,6 +91,7 @@ export default function CreateNewTask() {
               key={todo.id}
               onDeleteTask={deleteTask}
               content={todo.content}
+              isCompleteCheckout={todo.isComplete}
             />
           ))}
         </ul>
