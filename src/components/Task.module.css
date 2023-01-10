@@ -1,23 +1,71 @@
 .container {
-    margin-top: 1.5rem;
+    display: block;
+    position: relative;
+    padding-left:1.7rem;
+    cursor: pointer;
+    font-size: 22px;
+}
+.container input{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.check{
+    left: 0;
+    top: 0;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 100%;
+    border: 2px solid var(--blue);
+    position: absolute
+}
+
+.container input[type='checkbox']:checked + .check{
+    background-color:var(--purpleDark);
+    border: none;
+}
+
+.container .check:after{
+    top: 3.3px;
+    left: 6px;
+    width: 3px;
+    height: 0.5rem;
+    border: solid rgba(255, 255, 255, 0.541);
+    border-width: 0 2px 2px 0;
+    -webkit-transform:  rotate(45deg);
+    transform: rotate(32deg);
+    -ms-transform: rotate(47deg);
+}
+
+.check:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container input[type='checkbox']:checked + .check:after{
+    display: block;
 }
 .task {
+    margin-top: .75rem;
     border-radius: 8px;
     border: 1px solid var(--gray-400);
 
     padding: 1rem;
-    color: var(--white);
+    color: #F2F2F2;
     background-color: var(--gray-500);
-}
-label {
-    width: 2100px;
 }
 
 label > p {
+    margin-top: -.1rem;
     color: var(--gray-100);
-    font-size: 0.87rem;
+    font-size: .87rem;
     font-weight: 400;
     line-height: 20px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    display: flex;
 
     flex: 1;
 
@@ -27,6 +75,10 @@ label > p {
 }
 
 .task > div {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
     gap: 12px;
     display: flex;
 }
@@ -34,3 +86,27 @@ label > p {
     text-decoration: line-through;
     color: var(--gray-300);
 }
+.deleteTask {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 4px;
+    color: var(--gray-300);
+    transition: all .1s;
+}
+.svg {
+    color: var(--gray-300);
+    transition: all .1s;
+    cursor: pointer;
+}
+
+.svg:hover{
+    transition: all .1s;
+    background-color: rgba(39, 39, 39, 0.699);
+    color: rgba(255, 72, 72, 0.87);
+    width: auto;
+    border-radius: 5px;
+}
+

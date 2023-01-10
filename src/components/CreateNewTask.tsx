@@ -7,7 +7,7 @@ export default function CreateNewTask() {
   const [task, setTask] = useState([
     {
         id: 1,
-        content: 'task',
+        content: 'Bem vindo ao todoList',
         isComplete: false,
     }
   ]);
@@ -100,7 +100,7 @@ export default function CreateNewTask() {
             <p className={styles.countTask}>{task.length}</p>
           </div>
           <div>
-            <p>Concluídas </p>
+            <p className={styles.concluida}>Concluídas </p>
             <p className={styles.countTask}>{inputCheckedCount} de {task.length}</p>
           </div>
         </div>

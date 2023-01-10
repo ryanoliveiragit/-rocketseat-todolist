@@ -1,9 +1,11 @@
+.container {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 0 2rem;
+}
 .formInput {
     gap: 8px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    
     margin-top: -2rem;
 }
 .inputCreateNewTask {
@@ -90,6 +92,10 @@ p {
     border-radius: 999px;
     gap: 10px;
     padding: 2px 8px 2px 8px;
+}
+
+.concluida {
+    color: var(--purple);
 }
 
 
