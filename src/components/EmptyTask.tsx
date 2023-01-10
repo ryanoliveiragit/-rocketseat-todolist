@@ -1,4 +1,4 @@
-import styles from "./EmptyTask.module.css";
+import styles from "./Emptytask.module";
 
 export default function EmptyTask() {
   return (
