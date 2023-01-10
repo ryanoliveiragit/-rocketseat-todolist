@@ -43,7 +43,14 @@ export default function CreateNewTask() {
   function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
     event.target.setCustomValidity("");
 
-    setNewTask(event.target.value);
+    const value = event.target.value;
+
+    if (value.match(/^\s+$/)) {
+      event.preventDefault();
+      event.target.setCustomValidity("Não é permitido somente espaços");
+    }else{
+      setNewTask(value);
+    }
   }
 
   function handleUpdateTask(id: number, isComplete: any) {
