@@ -39,7 +39,6 @@ export default function Task({ content, onDeleteTask,  handleUpdateTask, id }: T
           <span className={style.check}></span>
           </label>
           <button className={style.deleteTask} onClick={handleDeleteTaks}><Trash className={style.svg} size={24}/></button>
-        
         </div>
       </div>
     </div>
