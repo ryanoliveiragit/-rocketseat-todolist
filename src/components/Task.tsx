@@ -4,7 +4,7 @@ import { CheckCircle, Check, Trash } from "phosphor-react";
 
 interface TaskProps {
   content: string;
-  isComplete: any;
+  isComplete: boolean;
   onDeleteTask: (content: string) => void;
   handleUpdateTask: any
   id: number;
