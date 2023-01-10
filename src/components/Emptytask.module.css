@@ -1,0 +1,31 @@
+.container {
+    padding: 4rem 1.5rem ;
+    border-top: 1px solid var(--gray-300);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.container div {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 140%;
+    text-align: center;
+    flex-direction: column;
+}
+.subTitle {
+    color: var(--gray-300);
+    font-weight: 400;
+    line-height: 140%;
+}
+
+.title {
+    color: var(--gray-300);
+    line-height: 140%;
+    margin-top: 1rem;
+    font-weight: 700;
+}
