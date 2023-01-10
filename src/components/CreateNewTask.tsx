@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, InvalidEvent, useEffect, useState } from "react";
 import styles from "./CreateNewTask.module.css";
+import EmptyTask from "./EmptyTask";
 import Task from "./Task";
 
 export default function CreateNewTask() {
@@ -7,7 +8,7 @@ export default function CreateNewTask() {
   const [task, setTask] = useState([
     {
         id: 1,
-        content: 'Bem vindo ao todoList',
+        content: 'NewTask',
         isComplete: false,
     }
   ]);
@@ -104,7 +105,8 @@ export default function CreateNewTask() {
             <p className={styles.countTask}>{inputCheckedCount} de {task.length}</p>
           </div>
         </div>
-        <ul>
+        {task.length > 0 ? (
+          <ul>
           {task.map((todo) => (
             <Task
               key={todo.id}
@@ -116,6 +118,9 @@ export default function CreateNewTask() {
             />
           ))}
         </ul>
+        ): (
+          <EmptyTask />
+        )}
       </section>
     </div>
   );
