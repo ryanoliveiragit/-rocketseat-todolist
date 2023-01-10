@@ -1,6 +1,6 @@
 import { useState } from "react";
 import style from "./Task.module.css";
-import { RadioButton, Check, Trash } from "phosphor-react";
+import { CheckCircle, Check, Trash } from "phosphor-react";
 
 interface TaskProps {
   content: string;
@@ -23,9 +23,11 @@ export default function Task({ content, onDeleteTask,  handleUpdateTask, id }: T
   }
 
   return (
-    <div className={style.container}>
+    <div>
       <div className={style.task}>
         <div className={style.checkbox}>
+          <label className={style.container}>
+          <p className={isChecked ? style.checked : ''}>{content}</p>
           <input
             checked={isChecked}
             onChange={handleOnChange}
@@ -34,10 +36,10 @@ export default function Task({ content, onDeleteTask,  handleUpdateTask, id }: T
             className={style.checkbox}
             name="check"
           />
-          <label>
-            <p className={isChecked ? style.checked : ''}>{content}.</p>
+          <span className={style.check}></span>
           </label>
-          <button onClick={handleDeleteTaks}>excluir</button>
+          <button className={style.deleteTask} onClick={handleDeleteTaks}><Trash className={style.svg} size={24}/></button>
+        
         </div>
       </div>
     </div>
