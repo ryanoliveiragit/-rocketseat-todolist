@@ -23,7 +23,7 @@
 }
 
 .inputCreateNewTask:focus{
-    outline: none;
+    outline: 2px solid var(--purple);
 }
 
 .inputCreateNewTask::placeholder{

@@ -15,7 +15,10 @@
     --blueDark: #1E6F9F;
     --danger: #E25858;
 }
-
+:focus {
+    outline: transparent;
+    box-shadow: 0 0 0 2px var(--green-500);
+}
 * {
     box-sizing: border-box;
     margin: 0;
