@@ -11,7 +11,7 @@
 - ReactJS
 - Vite
 - Typescript
-- Styled-components
+- css-modules
 
 ### Projeto em andamento...
 
