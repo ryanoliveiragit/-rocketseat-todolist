@@ -2,44 +2,53 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import styles from "./CreateNewTask.module.css";
 import EmptyTask from "./EmptyTask";
 import Task from "./Task";
+import { IoIosAdd } from "react-icons/io";
+import { DaysContTask } from "./DaysContTask";
 
 export default function CreateNewTask() {
-  const [task, setTask] = useState([
-    {
-      id: 1,
-      content: "NewTask",
-      isComplete: false,
-    },
-  ]);
-
-  const [inputCheckedCount, setInputCheckedCount] = useState(0);
-
-  useEffect(() => {
-    function countInputChecked() {
-      const filterInputs = task.filter((input) => input.isComplete === true);
-      setInputCheckedCount(filterInputs.length);
-    }
-    countInputChecked();
-  }, [task]);
+  const [selectedDay, setSelectedDay] = useState<string>("2025-01-07");
+  const [tasksForDay, setTasksForDay] = useState<any[]>([]);
 
   const [newTask, setNewTask] = useState("");
 
-  function handleAddTodoList(event: FormEvent) {
-    const NewTaskContent: {
-      id: number;
-      content: string;
-      isComplete: boolean;
-    } = {
+  useEffect(() => {
+    // Carregar as tarefas do dia selecionado do localStorage
+    const storedTasks = localStorage.getItem(`tasks-${selectedDay}`);
+    if (storedTasks) {
+      setTasksForDay(JSON.parse(storedTasks));
+    } else {
+      // Se não houver tarefas, cria as 4 tarefas iniciais
+      const initialTasks = [
+        { id: 1, content: "Treino + alimentação", isComplete: false },
+        { id: 2, content: "Hidratação", isComplete: false },
+        { id: 3, content: "Atividade mental", isComplete: false },
+        { id: 4, content: "Incentivo (Bônus)", isComplete: false, bonus: true }
+      ];
+      setTasksForDay(initialTasks);
+      // Salvar as tarefas iniciais no localStorage
+      localStorage.setItem(`tasks-${selectedDay}`, JSON.stringify(initialTasks));
+    }
+  }, [selectedDay]); // Quando o dia selecionado mudar, carregue as tarefas correspondentes
+
+  const handleAddTodoList = (event: FormEvent) => {
+    event.preventDefault();
+
+    const newTaskData = {
       id: Number(Math.floor(Math.random() * 1000)),
       content: newTask,
       isComplete: false,
     };
-    event.preventDefault();
-    setTask((oldTodoList) => [...oldTodoList, NewTaskContent]);
-    setNewTask("");
-  }
 
-  function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
+    const updatedTasks = [...tasksForDay, newTaskData];
+    setTasksForDay(updatedTasks);
+
+    // Salvar as tarefas no localStorage para o dia selecionado
+    localStorage.setItem(`tasks-${selectedDay}`, JSON.stringify(updatedTasks));
+
+    setNewTask(""); // Limpar o campo de input
+  };
+
+  const handleNewTaskChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.target.setCustomValidity("");
 
     const value = event.target.value;
@@ -50,26 +59,26 @@ export default function CreateNewTask() {
     } else {
       setNewTask(value);
     }
-  }
+  };
 
-  function handleUpdateTask(id: number, isComplete: boolean) {
-    setTask((prevTask) =>
-      prevTask.map((task) => {
-        if (task.id === id) {
-          return {
-            ...task,
-            isComplete,
-          };
-        }
-        return task;
-      })
+  const handleUpdateTask = (id: number, isComplete: boolean) => {
+    const updatedTasks = tasksForDay.map((task) =>
+      task.id === id ? { ...task, isComplete } : task
     );
-  }
+    setTasksForDay(updatedTasks);
 
-  function deleteTask(deletedTodo: string) {
-    const filterTodos = task.filter((todo) => todo.content !== deletedTodo);
-    setTask(filterTodos);
-  }
+    // Salvar as tarefas atualizadas no localStorage
+    localStorage.setItem(`tasks-${selectedDay}`, JSON.stringify(updatedTasks));
+  };
+
+  const deleteTask = (content: string) => {
+    // Remover a tarefa com base no conteúdo
+    const updatedTasks = tasksForDay.filter((task) => task.content !== content);
+    setTasksForDay(updatedTasks);
+
+    // Salvar as tarefas restantes no localStorage
+    localStorage.setItem(`tasks-${selectedDay}`, JSON.stringify(updatedTasks));
+  };
 
   const handleNewTaskEmpty = newTask.length === 0;
 
@@ -78,7 +87,7 @@ export default function CreateNewTask() {
       <form className={styles.formInput} onSubmit={handleAddTodoList}>
         <input
           className={styles.inputCreateNewTask}
-          placeholder="Adicione uma tarefa"
+          placeholder="Adicione uma atividade"
           type="text"
           value={newTask}
           onChange={handleNewTaskChange}
@@ -89,33 +98,26 @@ export default function CreateNewTask() {
           type="submit"
           disabled={handleNewTaskEmpty}
         >
-          Criar
-          <img
-            src="https://cdn.discordapp.com/attachments/1061025601240186921/1061085385612079174/Layer_1.png"
-            alt="Icone de adiionar"
-          />
+          Adicionar
+          <IoIosAdd size={23} />
         </button>
       </form>
 
+      <section>
+        <DaysContTask
+          selectedDay={selectedDay}
+          setSelectedDay={setSelectedDay}
+          setTasksForDay={setTasksForDay}
+        />
+      </section>
+
       <section className={styles.containerList}>
-        <div className={styles.containerTaskCounts}>
-          <div>
-            <p>Tarefas criadas</p>
-            <p className={styles.countTask}>{task.length}</p>
-          </div>
-          <div>
-            <p className={styles.concluida}>Concluídas </p>
-            <p className={styles.countTask}>
-              {inputCheckedCount} de {task.length}
-            </p>
-          </div>
-        </div>
-        {task.length > 0 ? (
+        {tasksForDay.length > 0 ? (
           <ul>
-            {task.map((todo) => (
+            {tasksForDay.map((todo) => (
               <Task
                 key={todo.id}
-                onDeleteTask={deleteTask}
+                onDeleteTask={deleteTask} // Passando a função de exclusão
                 content={todo.content}
                 isComplete={todo.isComplete}
                 handleUpdateTask={handleUpdateTask}

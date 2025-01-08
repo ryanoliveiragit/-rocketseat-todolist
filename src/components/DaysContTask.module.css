@@ -1,0 +1,39 @@
+.container {
+    text-align: center;
+}
+
+.daysContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.completed {
+    background-color: greenyellow!important;
+    color: rgb(17, 17, 17)!important;
+  }
+  
+.dayBall {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    border: 2px solid rgb(217, 248, 169);
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.selected {
+    background-color: rgb(217, 248, 169);;
+    border: 2px solid greenyellow; /* Borda roxa para o dia selecionado */
+  }
+.dayBall:hover {
+    background-color: rgb(217, 248, 169);;
+}
+

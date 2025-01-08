@@ -9,11 +9,14 @@
     --gray-600: #1A1A1A;
     --gray-700: #0D0D0D;
 
-    --purple: #8284FA;
-    --purpleDark: #5E60CE;
-    --blue: #4EA8DE;
-    --blueDark: #1E6F9F;
+    --purple: rgb(204, 255, 129);
+    --purpleDark: rgb(162, 204, 99);
+    --blue: #F4F4F8;
+    --blueDark: #F4F4F8;
     --danger: #E25858;
+}
+.completed {
+    color: rgb(204, 255, 129);
 }
 :focus {
     outline: transparent;

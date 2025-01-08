@@ -1,25 +1,28 @@
-import { useState } from "react";
-import style from "./Task.module.css";
 import { CheckCircle, Check, Trash } from "phosphor-react";
+import style from "./Task.module.css";
 
 interface TaskProps {
   content: string;
   isComplete: boolean;
   onDeleteTask: (content: string) => void;
-  handleUpdateTask: any
+  handleUpdateTask: (id: number, isComplete: boolean) => void;
   id: number;
 }
 
-export default function Task({ content, onDeleteTask,  handleUpdateTask, id }: TaskProps) {
-  const [isChecked, setIsChecked] = useState(false)
-
-  const handleOnChange = (e: any) => {
-    setIsChecked(!isChecked)
+export default function Task({
+  content,
+  isComplete,
+  onDeleteTask,
+  handleUpdateTask,
+  id,
+}: TaskProps) {
+  // Utilizando o isComplete diretamente, sem estado local isChecked
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleUpdateTask(id, e.target.checked);
-  }
+  };
 
-  function handleDeleteTaks(){
-    onDeleteTask(content)
+  function handleDeleteTask() {
+    onDeleteTask(content); // Excluindo a tarefa pelo conteúdo
   }
 
   return (
@@ -27,18 +30,20 @@ export default function Task({ content, onDeleteTask,  handleUpdateTask, id }: T
       <div className={style.task}>
         <div className={style.checkbox}>
           <label className={style.container}>
-          <p className={isChecked ? style.checked : ''}>{content}</p>
-          <input
-            checked={isChecked}
-            onChange={handleOnChange}
-            type="checkbox"
-            id="check1"
-            className={style.checkbox}
-            name="check"
-          />
-          <span className={style.check}></span>
+            <p className={isComplete ? style.checked : ""}>{content}</p>
+            <input
+              checked={isComplete}
+              onChange={handleOnChange}
+              type="checkbox"
+              id={`check-${id}`} // Alterado para usar id único
+              className={style.checkbox}
+              name="check"
+            />
+            <span className={style.check}></span>
           </label>
-          <button className={style.deleteTask} onClick={handleDeleteTaks}><Trash className={style.svg} size={24}/></button>
+          <button className={style.deleteTask} onClick={handleDeleteTask}>
+            <Trash className={style.svg} size={24} />
+          </button>
         </div>
       </div>
     </div>

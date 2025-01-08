@@ -1,11 +1,46 @@
 .header {
     background: var(--gray-700);
     display: flex;
-    padding: 6.2rem 0;
+    padding: 4.2rem;
+    padding-bottom: 5rem;
     justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+}
+.creditos {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .3rem;
+    text-align: center;
+    top: 2%;
+    font-size: 10px;
+    right: 2%;
+    color: rgba(255, 255, 255, 0.726);
+}
+a {
+    font-style: none;
+    color: rgba(255, 255, 255, 0.726);
+}
+.totalCount {
+    color: greenyellow;
+}
+.totalBonus {
+      color: var(--purple);
+}
+.count {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1;
+    justify-content: center;
+    justify-items: center;
+    color: white;
 }
 .header > div {
     display: flex;
+    gap: .5rem;
     align-items: center;
     margin-left: 12px;
 }
@@ -20,7 +55,7 @@
     color: var(--blue);
 }
 .do {
-    font-size: 2.5rem;
+    font-size: 1.7rem;
     font-weight: 900;
     line-height: 48.41px;
     color: var(--purple);
